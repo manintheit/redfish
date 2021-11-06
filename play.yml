@@ -1,0 +1,21 @@
+---
+- hosts: jump
+  connection: local
+  tasks:
+    - debug:
+        msg: "Starting redfish command"
+
+
+    - name: redfish command example
+      command: |
+        /usr/bin/python3 exec/redfish/redfish_command.py
+        --url https://wp.manintheit.org 
+        --username user 
+        --password pass 
+        --category Systems 
+        --command PowerOn
+        -k 
+      register: resp
+
+    - debug:
+        msg: "{{ resp }}"
